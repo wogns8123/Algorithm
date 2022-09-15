@@ -1,13 +1,11 @@
-import sys
-N = int(sys.stdin.readline())
-arr_N = list(map(int, sys.stdin.readline().split()))
-M = int(sys.stdin.readline())
-arr_M = list(map(int, sys.stdin.readline().split()))
+num = int(input())
+li = set(list(map(int, input().split())))
 
-arr_N = set(arr_N)
+find_num = int(input())
+find_li = list(map(int, input().split()))
 
-for i in arr_M:
-    if i in arr_N:
+for i in find_li:
+    if i in li:
         print(1)
     else:
         print(0)
