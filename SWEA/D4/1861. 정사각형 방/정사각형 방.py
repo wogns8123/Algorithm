@@ -1,12 +1,16 @@
-from collections import deque
-def bfs(count):
+def bfs(start_i, start_j, arr):
+    global count
+    que = []
+    que.append((start_i, start_j))
+    count = 1
     while que:
-        q = que.popleft()
+        q = que.pop(0)
         for di, dj in [[-1, 0], [0, 1], [1, 0], [0, -1]]:
             ri, rj = q[0] + di, q[1] + dj
-            if 0 <= ri < n and 0 <= rj < n  and arr[ri][rj] == arr[q[0]][q[1]] + 1:
-                que.append((ri,rj))
-        count += 1
+            if 0 <= ri < n and 0 <= rj < n and arr[ri][rj] == arr[q[0]][q[1]] + 1:
+                que.append((ri, rj))
+
+                count += 1
     return count
 
 tc = int(input())
@@ -14,23 +18,18 @@ for test in range(tc):
     n = int(input())
     arr = [list(map(int, input().split())) for _ in range(n)]
     count_list = []
-    que = deque()
+    count = 0
+    ans1 = 0
+    ans2 = 0
     result = []
     for i in range(n):
         for j in range(n):
-            que.append((i, j))
-            count = bfs(0)
-            
-            if count_list:
-                if count > max(count_list):
-                    result = []
-                    count_list.append(count)
-                    result.append(arr[i][j])
-                elif count == max(count_list):
-                    count_list.append(count)
-                    result.append(arr[i][j])
-            else:
-                count_list.append(count)
-                result.append(arr[i][j])
+            qwe = bfs(i, j, arr)
+            if qwe > ans1:
+                ans1 = qwe
+                ans2 = arr[i][j]
+            elif qwe == ans1:
+                if ans2 > arr[i][j]:
+                    ans2 = arr[i][j]
 
-    print(f'#{test+1} {min(result)} {max(count_list)}')
+    print(f'#{test + 1} {ans2} {ans1}')
