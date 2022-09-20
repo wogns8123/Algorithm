@@ -1,45 +1,34 @@
-tc = int(input())
-for test in range(tc):
-    N, M = map(int, input().split())
-    arr = [input() for _ in range(N)]
-
-    dic = {
-        '0001101': 0,
-        '0011001': 1,
-        '0010011': 2,
-        '0111101': 3,
-        '0100011': 4,
-        '0110001': 5,
-        '0101111': 6,
-        '0111011': 7,
-        '0110111': 8,
-        '0001011': 9,
+t = int(input())
+for T in range(1, t+1):
+    n, m = map(int, input().split())
+    li = []
+    key={
+        '0001101':0,
+        '0011001':1,
+        '0010011':2,
+        '0111101':3,
+        '0100011':4,
+        '0110001':5,
+        '0101111':6,
+        '0111011':7,
+        '0110111':8,
+        '0001011':9,
     }
-    start = 0
-    for i in range(N):
-        if '1' in arr[i]:
-            start = i
-            break
-
-    end = M
-    for i in range(M-1, 0, -1):
-        if arr[start][i] == '1':
-            end = i
-            break
-    text = arr[start][end-55:end+1]
-    result = []
-    for i in range(0,56,7):
-        a = text[i:i+7]
-        result.append(dic[a])
-    result2 = []        # 짝수 저장
-    result3 = []        # 홀수 저장
-    for i in range(len(result)):
-        if (i+1)%2 == 0:
-            result2.append(result[i])
+    co = 0
+    while len(li) == 0:
+        co += 1
+        st = list(input())
+        if st == ['0']*m:
+            pass
         else:
-            result3.append(result[i])
-
-    if (sum(result3)*3 + sum(result2)) % 10 == 0:
-        print(f'#{test+1} {sum(result)}')
+            for i in range(m-st[::-1].index('1'), (m-st[::-1].index('1'))%7, -7):
+                if key.get(''.join(st[i-7:i])) == None:
+                    pass
+                else:
+                    li.append(key.get(''.join(st[i-7:i])))
+    for _ in range(n-co):
+        st = list(input())
+    if (sum(li[1:8:2])*3 + sum(li[0:7:2])) % 10 == 0:
+        print(f'#{T} {sum(li)}')
     else:
-        print(f'#{test+1} 0')
+        print(f'#{T} 0')
