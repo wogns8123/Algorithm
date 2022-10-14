@@ -1,15 +1,16 @@
 tc = int(input())
 for test in range(tc):
-    arr = list(input())
-    lst = ['0']*len(arr)  # 초기화
-
+    s = list(input())
+    arr = ['0']*len(s)
     count = 0
-    for i in range(len(lst)):
-        if lst[i] != arr[i]:
-            count+=1
+    for i in range(len(s)):
+        if s[i] == '1': 
+            if arr[i] =='0':
+                arr[i:] = ['1']*len(arr[i:])
+                count += 1
+        elif s[i] == '0':
             if arr[i] == '1':
-                lst[i:] = ['1']*len(lst[i:])
-            else:
-                lst[i:] = ['0']*len(lst[i:])
+                arr[i:] = ['0'] * len(arr[i:])
+                count +=1
 
     print(f'#{test+1} {count}')
