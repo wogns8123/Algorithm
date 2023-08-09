@@ -1,65 +1,34 @@
-import sys
+from collections import deque
+def bfs(x,y):
+    que = deque()
+    que.append((x,y))
+    graph[x][y] = 0
 
+    dx = [-1,1,0,0]
+    dy = [0,0,-1,1]
 
-def bfs(i,j):
-    que = []
-    que.append((i,j))
-    arr[i][j] = 0
     while que:
-        node = que.pop(0)
-        for di, dj in [[0, 1], [1, 0], [0, -1], [-1, 0]]:  # 동, 남,서,북
-            ri, rj =node[0] + di, node[1] + dj
-            if 0 <= ri < N and 0 <= rj < M and arr[ri][rj] == 1:
-                arr[ri][rj] = 0
-                que.append((ri,rj))
-    return
+        rx,ry = que.popleft()
+        for i in range(4):
+            qx = rx + dx[i]
+            qy = ry + dy[i]
+            if 0<=qx<m and 0<=qy<n:
+                if graph[qx][qy] == 1:
+                    graph[qx][qy] = 0
+                    que.append((qx,qy))
 
 
-# def bfs(start_i,start_j):
-#     visited = [[0]*N for _ in range(N)]
-#     que = []
-#     que.append((start_i,start_j))
-#     arr[start_i][start_j] = 0
-#     count = 1
-#     while que:
-#         node = que.pop(0)
-#         for di, dj in [[0, 1], [1, 0], [0, -1], [-1, 0]]:  # 동, 남,서,북
-#             ri, rj = node[0] + di, node[1] + dj
-#             if 0 <= ri < N and 0 <= rj < N and arr[ri][rj] == '1':
-#                 arr[ri][rj] =0
-#                 count +=1
-#                 que.append((ri, rj))
-#     return count
-
-
-N = int(input())
-for test in range(N):
-    N,M,K = map(int,input().split())
-    arr = [[0]*M for _ in range(N)]
-
-    for _ in range(K):
-        i, j = map(int,input().split())
-        arr[i][j] = 1
-    
-    count = 0
-    for q in range(N):
-        for w in range(M):
-            if arr[q][w] == 1:
-                bfs(q,w)
-                count += 1
-    print(count)
-
-
-# count = []
-# for i in range(N):
-#     for j in range(N):
-#         if arr[i][j] == '1':
-#             count.append(bfs(i,j))
-# count.sort()
-# print(len(count))
-# for i in count:
-#     print(i)
-
-
-
-
+t = int(input())
+for _ in range(t):
+    m,n,k = map(int,input().split())
+    graph = [[0] * (n+1) for _ in range(m+1)]
+    for __ in range(k):
+        x,y = map(int,input().split())
+        graph[x][y] = 1
+    result = 0
+    for i in range(m):
+        for j in range(n):
+            if graph[i][j] ==1:
+                bfs(i,j)
+                result+=1
+    print(result)
