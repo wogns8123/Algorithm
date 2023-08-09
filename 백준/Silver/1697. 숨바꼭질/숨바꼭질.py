@@ -1,21 +1,18 @@
-def BFS(n,m):
-    que = []
-    que.append(n)
-    while que:
-        node = que.pop(0)
-        if node == m:
-            print(visited[node])
-            break
-        else:
-            lst = [node + 1, node-1,node*2]
-            for i in lst:
-                if 0<= i <= 100000:
-                    if visited[i] ==0:
-                        visited[i] = visited[node] + 1
-                        que.append(i)
-    return visited
+from collections import deque
 
-N, M = map(int,input().split())
-result = 0
-visited = [0] * 100001
-BFS(N,M)
+def bfs():
+    que = deque()
+    que.append(x)
+    lst[x] = 1
+    while que:
+        q = que.popleft()
+        if q==y:
+            return lst[q]-1
+        for i in (q*2, q+1, q-1):
+            if 0<=i<100001 and not lst[i]:
+                lst[i] = lst[q] +1
+                que.append(i)
+
+x,y = map(int,input().split())
+lst = [0] * 200001
+print(bfs())
