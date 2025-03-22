@@ -1,24 +1,27 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        int test = scan.nextInt();
-        int[] arr = new int[test];
-        int maxNumb = -1000000;
-        int minNumb = 10000000;
-        for (int i = 0; i < test; i ++){
-            arr[i] = scan.nextInt();
-        }
-        for(int k: arr){
-            if (k > maxNumb){
-                maxNumb = k;
-            }
-            if (k < minNumb){
-                minNumb = k;
-            }
-        }
-        System.out.println(minNumb + " " + maxNumb);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+        Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int maxNum = -1000000;
+        int minNum = 1000000;
+
+        while (st.hasMoreTokens()){
+            int val = Integer.parseInt(st.nextToken());
+            if (val > maxNum){
+                maxNum = val;
+            }
+            if (val < minNum){
+                minNum = val;
+            }
+        }
+        System.out.println(minNum + " " + maxNum);
     }
 }
