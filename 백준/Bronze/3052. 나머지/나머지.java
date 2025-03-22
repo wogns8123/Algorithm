@@ -1,15 +1,19 @@
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        HashSet<Integer> check = new HashSet<>();
-        for (int i = 0 ; i<10;i++){
-            int number = scan.nextInt();
-            check.add(number%42);
+        int[] arr = new int[42];
+        int count = 0;
+        for(int i = 0; i < 10; i++){
+            int student = scan.nextInt();
+            arr[student%42] += 1;
         }
-        System.out.println(check.size());
+        for(int k:arr){
+            if(k!=0){
+                count += 1;
+            }
+        }
+        System.out.println(count);
     }
 }
