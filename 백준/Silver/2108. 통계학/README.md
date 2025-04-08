@@ -1,14 +1,18 @@
-# [Silver III] 통계학 - 2108 
+# [Silver II] 통계학 - 2108 
 
 [문제 링크](https://www.acmicpc.net/problem/2108) 
 
 ### 성능 요약
 
-메모리: 52284 KB, 시간: 540 ms
+메모리: 67708 KB, 시간: 680 ms
 
 ### 분류
 
-구현(implementation), 수학(math), 정렬(sorting)
+구현, 수학, 정렬
+
+### 제출 일자
+
+2025년 4월 8일 18:35:27
 
 ### 문제 설명
 
