@@ -1,29 +1,42 @@
-import java.util.*;
+import java.io.*;
 
 public class Main {
-    public static void main (String[]args){
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int new_score = scanner.nextInt();
-        int p = scanner.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] input = br.readLine().split(" ");
 
-        Integer[] arr = new Integer[n];
-        for(int i=0; i<n; i++){
-            arr[i] = scanner.nextInt();
+        int N = Integer.parseInt(input[0]);
+        int newScore = Integer.parseInt(input[1]);
+        int P = Integer.parseInt(input[2]);
+
+        if (N == 0) {
+            System.out.println(1);
+            return;
         }
-        Arrays.sort(arr, Collections.reverseOrder());
 
-        if(n == p && new_score <= arr[arr.length-1])
-            System.out.print(-1);
-        else{
+        String[] scoreInput = br.readLine().split(" ");
+        int[] arr = new int[N];
+        for (int i = 0; i < N; i++) {
+            arr[i] = Integer.parseInt(scoreInput[i]);
+        }
+
+        if (N == P && newScore <= arr[N - 1]) {
+            System.out.println(-1);
+        } else{
             int rank = 1;
-            for(int i=0; i<arr.length; i++){
-                if(new_score < arr[i])
+
+            for (int i = 0; i < N; i++) {
+                if (arr[i] > newScore) {
                     rank++;
-                else
+                } else {
                     break;
+                }
             }
-            System.out.print(rank);
+            System.out.println(rank);
+
         }
+
+
+
     }
 }
