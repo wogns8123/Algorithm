@@ -17,7 +17,7 @@ public class Main {
 
         int result = 0;
         int N = 0;
-        for(int i = 1; i<=S.length(); i++){
+        for(int i = 1; i<=S.length()/2; i++){
             N = i * 2;
             for(int j = 0; j <S.length()-N+1 ; j++){
                 String temp = S.substring(j,j+N);
