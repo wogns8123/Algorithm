@@ -1,21 +1,19 @@
-WITH PERFORMANCE_BONUS AS (
-    SELECT EMP_NO, AVG(SCORE),
-    CASE WHEN AVG(SCORE) >= 96 THEN "S"
-         WHEN AVG(SCORE) >= 90 THEN "A"
-         WHEN AVG(SCORE) >= 80 THEN "B"
-         ELSE "C"
+SELECT 
+    E.EMP_NO,
+    E.EMP_NAME,
+    CASE
+        WHEN AVG(G.SCORE) >= 96 THEN 'S'
+        WHEN AVG(G.SCORE) >= 90 THEN 'A'
+        WHEN AVG(G.SCORE) >= 80 THEN 'B'
+        ELSE 'C'
     END AS GRADE,
-    CASE WHEN AVG(SCORE) >= 96 THEN 0.2
-         WHEN AVG(SCORE) >= 90 THEN 0.15
-         WHEN AVG(SCORE) >= 80 THEN 0.1
-         ELSE 0
+    CASE
+        WHEN AVG(G.SCORE) >= 96 THEN E.SAL * 0.2
+        WHEN AVG(G.SCORE) >= 90 THEN E.SAL * 0.15
+        WHEN AVG(G.SCORE) >= 80 THEN E.SAL * 0.1
+        ELSE 0
     END AS BONUS
-    FROM HR_GRADE 
-    GROUP BY EMP_NO
-)
-
-
-SELECT employees.EMP_NO, employees.EMP_NAME, bonus.GRADE, bonus.BONUS * employees.SAL AS BONUS
-FROM HR_EMPLOYEES employees
-JOIN performance_bonus bonus ON employees.EMP_NO = bonus.EMP_NO
-ORDER BY employees.EMP_NO;
+FROM HR_EMPLOYEES E
+JOIN HR_GRADE G ON E.EMP_NO = G.EMP_NO
+GROUP BY E.EMP_NO, E.EMP_NAME
+ORDER BY E.EMP_NO;
